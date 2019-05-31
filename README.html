@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta name="generator" content="HTML::TextToHTML v2.51"/>
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-70%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+h4, h3 {
+    font-family: arial, sans-serif;
+}
+</style>
+</head>
+<body>
+<p>
+<h4>
+	<h3>This NEURON + Python scripts associated with paper:</h3><br/>
+    Ruben A. Tikidji-Hamburyan, Conrad A. Leonik and Carmen C. Canavier <br/>
+    Phase Response Theory Explains Cluster Formation in Sparsely but Strongly Connected 
+    Inhibitory Neural Networks and Effects of Jitter due to Sparse Connectivity
+    <br/>
+    <i>J Neurophysiology 2019 </i><br/>
+</h4>
+ 
+</p><hr/>
+<font  style="font-family: arial, sans-serif;" >
+
+<p>To use this scripts you need python libraries:
+<ol>
+	<li><a ref="http://www.numpy.org">numpy</a></li>
+	<li><a ref="http://www.scipy.org">scipy</a></li>
+	<li><a ref="http://matplotlib.org">matplotlib</a> and LaTeX for correct graphical interface</li>
+</ol>
+Under <u>Ubuntu</u> or any other <u>Debian</u> based Linux, use the following command for installation all required packages: <b>sudo apt-get install python-numpy python-scipy python-matplotlib texlive-full ncurses-dev dvipng</b></br>
+You can use <b>yum</b> or <b>zymm</b> under <i>RadHad(C)</i> or <i>SUSE(C)</i> based Linux distributions for installation or consult your distribution package-manager.</br>
+<b>NOTE: These scripts were <u>NOT</u> tested under <i>Windows(C)</i>, <i>MacOS(C)</i> or any other operating systems.</b></br>
+Please let me know if you you can run this code under <i>Windows(C)</i>, <i>MacOS(C)</i> (Ruben Tikidji-Hamburyan, ruben (dot) tikidji (dot) hamburyan (at) gmail (dot) com)
+
+</p><hr/>
+
+<p> To run simulations of pure ingibitory <b>I-network</b>:
+<ol>
+ <li><b>cd PIR-Inetwork</b></li>
+ <li><b>nrnivmodl</b></li>
+ <li><b>nrngui -nogui -python network.py --help</b></li>
+</ol>
+ Last command prints out a short HOWTO and the list of parameters on screen, but does <b>not</b> run simulation. You can use printed parameters to replicate Figures in the paper.
+</p>
+---
+<p> To replicate activity for any parameter set (<u>X</u> synaptic conductance in uS  and <u>Y</u> delay in milliseconds) in bifurcation diagram Figure 5 B run:<br/>
+  <b> nrngui -nogui -python network.py /gui=True /preview=True /git=False /ncon=\(\'b\',0.133\) /synapse/weight=<u>X</u> /synapse/delay=<u>Y</u></b><br/>
+</p>
+<p style="margin-left: 50px;">
+ For example Figure 4 A1 - two clusters:<br/>
+  <b>nrngui -nogui -python network.py /gui=True /preview=True /git=False /ncon=299,299,40 /synapse/weight=0.006e-2 /synapse/delay=0.8</b><br/>
+ For example Figure 4 A2 - synchrony:<br/>
+  <b>nrngui -nogui -python network.py /gui=True /preview=True /git=False /ncon=299,299,40 /synapse/weight=0.1e-2  /synapse/delay=3.</b><br/>
+
+ For example Figure 4 B1 - two clusters:<br/>
+  <b>nrngui -nogui -python network.py /gui=True /preview=True /git=False /ncon=40 /synapse/weight=0.006e-2 /synapse/delay=0.8</b><br/>
+ For example Figure 4 B2 - synchrony:<br/>
+  <b>nrngui -nogui -python network.py /gui=True /preview=True /git=False /ncon=40 /synapse/weight=0.1e-2  /synapse/delay=3.</b><br/>
+ For example Figure 4 B1 - two clusters:<br/>
+  <b>nrngui -nogui -python network.py /gui=True /preview=True /git=False /ncon=\'b\',0.1333 /synapse/weight=0.006e-2 /synapse/delay=0.8</b><br/>
+ For example Figure 4 B2 - synchrony:<br/>
+  <b>nrngui -nogui -python network.py /gui=True /preview=True /git=False /ncon=\'b\',0.1333 /synapse/weight=0.1e-2   /synapse/delay=3.</b><br/>
+ 
+ 
+ For example Figure 5 D1 - transitional:<br/>
+  <b>nrngui -nogui -python network.py /gui=True /preview=True /git=False /ncon=\'b\',0.133 /synapse/weight=0.0025e-2 /synapse/delay=3</b><br/>
+ For example Figure 5 D2 - asynchrony:<br/>
+  <b>nrngui -nogui -python network.py /gui=True /preview=True /git=False /ncon=\'b\',0.133 /synapse/weight=0.3e-2    /synapse/delay=0.8</b><br/>
+ 
+ For example Figure 6 A - synaptic modulation for delay 2.2ms (simulation is very slow):<br/> 
+  <b>nrngui -nogui -python network.py /gui=True /preview=True /git=False /ncon=\'b\',0.1333 /synapse/weight=0.006e-2 /synapse/delay=2.2 /wmod/scale=3.333 /wmod/time-points=\[600,1000\] /corefunc=1 /corefunc=1 /neuron/Istdev=0.     /tv=0,1001</b><br/>
+ For example Figure 6 B - synaptic modulation with noise (simulation is very slow):<br/> 
+  <b>nrngui -nogui -python network.py /gui=True /preview=True /git=False /ncon=\'b\',0.1333 /synapse/weight=0.006e-2 /synapse/delay=2.2 /wmod/scale=3.333 /wmod/time-points=\[600,1000\] /corefunc=1 /corefunc=1 /neuron/Istdev=0.2e-2 /tv=0,1001</b><br/>
+</p>
+ 
+---
+
+<p>To replicate activity for any parameter set in bifurcation diagram Figure 5A run:<br/>
+  <b>nrngui -nogui -python network.py /gui=True /preview=True /git=False /ncon=\(299,299,40\) /synapse/weight=<u>X</u> /synapse/delay=<u>X</u></b><br/>
+</p><p style="margin-left: 50px;">
+ For example<br/>
+  for 2 clusters: <b>nrngui -nogui -python network.py /gui=True /preview=True /git=False /ncon=\(299,299,40\) /synapse/weight=0.006e-2 /synapse/delay=0.8</b><br/>
+  for synchrony: <b>nrngui -nogui -python network.py /gui=True /preview=True /git=False /ncon=\(299,299,40\) /synapse/weight=0.1e-2   /synapse/delay=3.</b><br/>
+</p>
+
+<hr/>
+ 
+<p> To run simulations excitatory/inhibitory <b>E/I-network</b>::
+<ol>
+	<li><b>cd PIR-EInetwork</b></li>
+	<li><b>nrnivmodl</b></li>
+	<li><b>nrngui -nogui -python pirping-network.py --help</b></li>
+</ol>
+Again last one will just print out HOWTO.
+</p>
+---
+<p> To run simulation for any point in Figure 7B  with synaptic conductance = <u>X</u> uS run :<br/>
+  <b>nrngui -nogui -python pirping-network.py -f=PIR-PING-2.2ms-rnd.conf /Connections/II/gmax-mean=<u>X</u></b><br/>
+</p><p style="margin-left: 50px;">
+	To replicate exact Figure 7A1 run:<br/>
+  <b>nrngui -nogui -python pirping-network.py -f=example-asyn.conf</b><br/>
+ To regenerate network with parameters as in Figure 7A1 but with random 
+ set of connections and Poisson's processes spikes (regenerated stochasticity) run:<br/>
+  <b>nrngui -nogui -python pirping-network.py -f=PIR-PING-2.2ms-rnd.conf /Connections/II/gmax-mean=1.333521e-5</b><br/>
+</p><p style="margin-left: 50px;"> 
+ To replicate exact Figure 7A2 run:<br/>
+  <b>nrngui -nogui -python pirping-network.py -f=example-ping.conf</b><br/>
+ or with regenerated stochasticity :<br/>
+  <b>nrngui -nogui -python pirping-network.py -f=PIR-PING-2.2ms-rnd.conf /Connections/II/gmax-mean=1.0e-06</b><br/>
+</p><p style="margin-left: 50px;">
+ To replicate exact Figure 7A3 run:<br/>
+  <b>nrngui -nogui -python pirping-network.py -f=example-2clt.conf</b><br/>
+ or with regenerated stochasticity :<br/>
+  <b>nrngui -nogui -python pirping-network.py -f=PIR-PING-2.2ms-rnd.conf /Connections/II/gmax-mean=7.498942e-05</b><br/>
+</p><p style="margin-left: 50px;">
+ To replicate exact Figure 7A4 run:<br/>
+  <b>nrngui -nogui -python pirping-network.py -f=example-sync.conf</b><br/>
+ or with regenerated stochasticity :<br/>
+  <b>nrngui -nogui -python pirping-network.py -f=PIR-PING-2.2ms-rnd.conf /Connections/II/gmax-mean=1.0e-02</b><br/>
+
+</p>
+
+<hr />
+Files in this record:<br/>
+</font>
+<table style="width:70%">
+  <tr>
+	<th>Directory/File</th><th>Description</th>
+  </tr><tr>
+	 <td>PIR-Inetwork/</td><td>the I-network model</td>
+  </tr><tr>
+	 <td>PIR-Inetwork/network.py</td><td>the main model script</td>
+  </tr><tr>
+	 <td>PIR-Inetwork/*.mod</td><td>NEURON mechanisms for the main model</td>
+  </tr><tr>
+	 <td>PIR-EInetwork</td><td>the model of EI-network</td>
+  </tr><tr>
+	 <td>PIR-EInetwork/pirping-network.py</td><td>the main model script</td>
+  </tr><tr>
+	 <td>PIR-EInetwork/PIR-PING-2.2ms-rnd.conf   </td><td>the main parameter set</td>
+  </tr><tr>
+	 <td>PIR-EInetwork/example-ping.conf </td><td>example of PING mode</td>
+  </tr><tr>
+	 <td>PIR-EInetwork/example-2clt.conf </td><td>example of 2 cluster mode</td>
+  </tr><tr>
+	 <td>PIR-EInetwork/example-asyn.conf </td><td>example of asychrony mode</td>
+  </tr><tr>
+	 <td>PIR-EInetwork/example-sync.conf </td><td>example of synchrony mode</td>
+  </tr><tr>
+	 <td>PIR-EInetwork/ECellOlufsen.py </td><td> python module for Olufsen et al 2003 module</td>
+  </tr><tr>
+	 <td>PIR-EInetwork/ECellOlufsen.mod </td><td> required NEURON mechanisms</td>
+  </tr><tr>
+	 <td>PIR-EInetwork/HHinh.py  </td><td>python module for Hodgkin-Huxley model</td>
+  </tr><tr>
+	 <td>PIR-EInetwork/SGen.py  </td><td>artificial spike generator</td>
+  </tr><tr>
+	 <td>PIR-EInetwork/vecevent.mod</td><td>NEURON module for the spike generator</td>
+  </tr><tr>
+	 <td>PIR-EInetwork/simtools</td><td>python network generator</td>
+  <tr>
+</table>
+</p>
+</body>
+</html>
