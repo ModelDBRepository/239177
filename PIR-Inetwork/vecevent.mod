@@ -29,17 +29,19 @@ NET_RECEIVE (w) {
 }
 
 VERBATIM
+#ifndef NRN_VERSION_GTEQ_8_2_0
 extern double* vector_vec();
 extern int vector_capacity();
 extern void* vector_arg();
+#endif
 ENDVERBATIM
 
 PROCEDURE element() {
 VERBATIM	
-  { void* vv; int i, size; double* px;
+  { int i, size; double* px;
 	i = (int)index;
 	if (i >= 0) {
-		vv = *((void**)(&space));
+		IvocVect* vv = *((IvocVect**)(&space));
 		if (vv) {
 			size = vector_capacity(vv);
 			px = vector_vec(vv);
